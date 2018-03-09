@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户登录</title>
+</head>
+<body>
+	<form action="" id="form1">
+		<table>
+			<tr>
+				<td>用 户 名：</td>
+				<td><input type="text" name="name" id="name" />&nbsp;<font
+					color="#c00fff">*</font></td>
+				<td>
+					<div id="nameDiv" style="display: inline"></div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#name").blur(function(){
+			var name=$("#name").val();
+			if(name==null || name==""){
+				$("#nameDiv").html("不能为空");
+				
+			}else{
+				$.get("userServlet","name="+name,callBack);
+			}
+		});
+	});		
+		//响应成功时的回调函数
+		function callBack(data){//入参表示响应结果
+			if(data=="true"){
+				$("#nameDiv").html("用户名已经被使用");
+			}else{
+				$("#nameDiv").html("用户可以使用 ");
+			}
+			
+		}
+</script>
+</body>
+</html>
